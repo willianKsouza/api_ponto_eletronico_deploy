@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Employees {
+  employee_id              String      @id @default(uuid())
+  name_employee            String      @default("")
+  avatar_employee          String?     @default("")
+  avatar_path              String?     @default("")
+  avatar_file_name         String?     @default("")
+  function_employee        String      @default("")
+  workload_employee        Int
+  email                    String      @unique
+  password                 String      @default("")
+  createdAt                DateTime    @default(now())
+  updatedAt                DateTime    @updatedAt
+  deleted_at               DateTime?
+  last_register_time_sheet String?      @default("")
+  timesheets               Timesheet[]
+  user_token               UserToken[]
+}
+
+model Timesheet {
+  time_sheet_id String    @id @default(uuid())
+  in_time       DateTime?
+  launch_in     DateTime?
+  launch_out    DateTime?
+  out_time      DateTime?
+  owed_hours    Int?
+  work_load     Int 
+  hours_worked  Int?
+  overtime      Int?
+  createdAt     DateTime  @default(now())
+  employee_id   String
+  employee      Employees @relation(fields: [employee_id], references: [employee_id], onDelete: Cascade)
+}
+
+model UserToken {
+  user_token_id String    @id @default(uuid())
+  employee_id   String
+  token         String    @default(uuid())
+  createdAt     DateTime  @default(now())
+  employee      Employees @relation(fields: [employee_id], references: [employee_id], onDelete: Cascade)
+}
