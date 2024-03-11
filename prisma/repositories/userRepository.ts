@@ -11,7 +11,7 @@ import {
   ICreateUserTokenRepository,
   IFindEmployeeByFilterRepository
 } from "../../src/shared/interfaces/IEmployeeRepository";
-import { prisma } from "../connectDb";
+import { prisma } from "../../src/data/connectDb";
 import { IUserToken } from "../../src/shared/interfaces/IuserToken";
 import { IFilterEmployee } from "../../src/shared/interfaces/IFilterEmployee";
 

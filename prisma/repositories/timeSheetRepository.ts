@@ -1,7 +1,7 @@
 import { IUpdateRepository } from "../../src/shared/interfaces/IEmployeeRepository";
 import { ITimesheet } from "../../src/shared/interfaces/ITimeSheet";
 import { ICreateTimeSheetRepository, IFindOneTimeSheetRepository, ITimeSheetUpdateRepository } from "../../src/shared/interfaces/ITimeSheetRepository";
-import { prisma } from "../connectDb";
+import { prisma } from "../../src/data/connectDb";
 
 
 export class UpdateTimeSheetRepository implements ITimeSheetUpdateRepository {
