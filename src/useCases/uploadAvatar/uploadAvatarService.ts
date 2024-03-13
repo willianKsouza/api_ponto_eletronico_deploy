@@ -8,6 +8,7 @@ import {
   IGetAvatarUrl,
   IUploadAvatar,
 } from "../../shared/interfaces/ISupaBase";
+import { apiError } from "../../shared/middlewares/AppError";
 import { deleteFileServer } from "../../shared/utils/deleteFileServer";
 export class UploadAvatarService {
   constructor(
@@ -40,7 +41,8 @@ export class UploadAvatarService {
         deletedFile: deletedFile,
       };
     }
-    const saveCloud = await this.saveCloudStorage.uploadFile(objFile);
+    if (employee) {
+      const saveCloud = await this.saveCloudStorage.uploadFile(objFile);
     const getUrl = await this.getAvatarUrl.getUrl(objFile.filename);
 
     await this.UpdateEmployee.update(id, {
@@ -53,6 +55,9 @@ export class UploadAvatarService {
       saveCloud: saveCloud,
       getUrl: getUrl,
     };
+    }
+
+    throw new apiError('erro na operaçao', 500)
   }
 }
 

@@ -4,14 +4,9 @@ import {
   IUpdateRepository,
 } from "../../../shared/interfaces/IEmployeeRepository";
 import { UpdateDataValidation } from "../../../shared/utils/updateDataValidation";
+import { IUpdateEmployee } from "../../../shared/interfaces/IUpdateEmployee";
 
-interface IUpdateEmployee {
-  employee_id: string;
-  name_employee?: string;
-  function_employee?: string;
-  workload_employee?: number;
-  email?: string;
-}
+
 
 export class UpdateEmployeeService {
   constructor(
@@ -19,11 +14,12 @@ export class UpdateEmployeeService {
     private findEmployeeById: IFindByIdRepository
   ) {}
 
-  @UpdateDataValidation()
+
   async execute(data: IUpdateEmployee) {
     try {
       const { email, function_employee, name_employee, workload_employee } =
         data;
+        UpdateDataValidation(data)
         if (function_employee == 'adm') {
           const employeeExists = await this.findEmployeeById.findById(data.employee_id);
           if (employeeExists) {

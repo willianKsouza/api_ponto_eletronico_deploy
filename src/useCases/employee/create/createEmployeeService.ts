@@ -7,9 +7,9 @@ import { IUser } from "../../../shared/interfaces/IUser";
 import { CreateDataValidation } from "../../../shared/utils/createDataValidation";
 export class CreateEmployeeService {
   constructor(private employeeRepository: ICreateRepository) {}
-  @CreateDataValidation()
+
   async execute(data: Omit<IUser, "employee_id">) {
-   
+    CreateDataValidation(data)
     const saltRounds = 10;
     const hash = hashSync(data.password, saltRounds);
     try {

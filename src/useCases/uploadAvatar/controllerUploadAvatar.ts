@@ -5,9 +5,9 @@ export class ControllerUploadAvatar {
   constructor(private uploadAvatar: UploadAvatarService) {}
   async uploadFile(req: Request, res: Response) {
     try {
-      const { id } = req.params;
+      const { employee_id } = req.cookies.securityData;
       if (req.file) {
-        const employeeFile = await this.uploadAvatar.execute(id, req.file);
+        const employeeFile = await this.uploadAvatar.execute(employee_id, req.file);
         return res.status(200).json({ data: employeeFile });
       }
         return null

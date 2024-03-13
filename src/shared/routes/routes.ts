@@ -16,7 +16,6 @@ routes.use("/findemployee", findEmployee)
 routes.use("/login", loginRouter)
 routes.use("/avatar", avatarRouter);
 routes.use("/timesheet", timeSheetRouter);
-// routes.use("/sendemail", sendEmailRouter);
 routes.use("/password", passwordRouter);
 
 

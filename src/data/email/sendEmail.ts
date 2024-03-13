@@ -34,7 +34,6 @@ export class Email implements ISendEmail {
         extName: ".handlebars",
       })
     );
-    // "./src/views";
     const mail = {
       from: from || "equipe@apitimesheet.com.br",
       to: to,
@@ -46,6 +45,6 @@ export class Email implements ISendEmail {
       },
     };
 
-    const message = await transport.sendMail(mail);
+     await transport.sendMail(mail);
   }
 }
