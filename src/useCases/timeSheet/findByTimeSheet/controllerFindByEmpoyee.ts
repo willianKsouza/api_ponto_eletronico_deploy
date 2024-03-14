@@ -20,7 +20,6 @@ export class ControllerFindByEmployeeTimeSheet {
         .cookie('securityData', req.cookies.securityData, {
           httpOnly: true,
           secure: true,
-          sameSite: 'none',
         })
         .json({ timeSheetEmployee });
     } catch (error) {
