@@ -9,7 +9,8 @@ export class ControllerFindByEmployeeTimeSheet {
     if (!req.cookies.securityData) {
       return res.status(500).json({ data: 'sem securityData' });
     }
-
+    console.log(req.cookies.securityData);
+    
     const { time_sheet_id } = req.cookies.securityData;
 
     try {
@@ -20,7 +21,6 @@ export class ControllerFindByEmployeeTimeSheet {
         .cookie('securityData', req.cookies.securityData, {
           httpOnly: true,
           secure: true,
-          sameSite:'none'
         })
         .json({ timeSheetEmployee });
     } catch (error) {
