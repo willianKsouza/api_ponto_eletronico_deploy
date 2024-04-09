@@ -17,7 +17,8 @@ export class ControllerLoginEmployee {
         .cookie("securityData", {auth, token, employee_id, time_sheet_id, function_employee}, {
           httpOnly: true,
           secure: true,
-          sameSite:'none'
+          maxAge:5*60*1000,
+          sameSite:'strict'
         })
         .status(201)
         .json({ auth, token, employee_id, time_sheet_id });

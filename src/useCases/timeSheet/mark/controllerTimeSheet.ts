@@ -37,7 +37,8 @@ export class ControllerTimeSheet {
         .cookie("securityData", cookies, {
           httpOnly: true,
           secure: true,
-          sameSite:'none'
+          maxAge:5*60*1000,
+          sameSite:'strict'
         })
         .status(200)
         .json({ timeSheetService });

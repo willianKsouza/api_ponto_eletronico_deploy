@@ -9,7 +9,7 @@ export class ControllerFindByEmployeeTimeSheet {
     if (!req.cookies.securityData) {
       return res.status(500).json({ data: 'sem securityData' });
     }
-    console.log(req.cookies.securityData);
+
     
     const { time_sheet_id } = req.cookies.securityData;
 
