@@ -21,6 +21,8 @@ export class ControllerFindByEmployeeTimeSheet {
         .cookie('securityData', req.cookies.securityData, {
           httpOnly: true,
           secure: true,
+          maxAge:5*60*1000,
+          sameSite:'strict'
         })
         .json({ timeSheetEmployee });
     } catch (error) {
