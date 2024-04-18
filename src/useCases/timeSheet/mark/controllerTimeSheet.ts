@@ -38,7 +38,7 @@ export class ControllerTimeSheet {
           httpOnly: true,
           secure: true,
           maxAge:5*60*1000,
-          sameSite:'strict'
+          sameSite:"lax"
         })
         .status(200)
         .json({ timeSheetService });

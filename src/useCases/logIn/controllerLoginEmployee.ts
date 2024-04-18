@@ -18,7 +18,7 @@ export class ControllerLoginEmployee {
           httpOnly: true,
           secure: true,
           maxAge:5*60*1000,
-          sameSite:'strict'
+          sameSite:"lax"
         })
         .status(201)
         .json({ auth, token, employee_id, time_sheet_id });

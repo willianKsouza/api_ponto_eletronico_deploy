@@ -22,7 +22,7 @@ export class ControllerFindByEmployeeTimeSheet {
           httpOnly: true,
           secure: true,
           maxAge:5*60*1000,
-          sameSite:'strict'
+          sameSite:"lax"
         })
         .json({ timeSheetEmployee });
     } catch (error) {
