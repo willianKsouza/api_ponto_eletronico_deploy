@@ -38,7 +38,8 @@ export class ControllerTimeSheet {
           httpOnly: true,
           secure: true,
           maxAge:5*60*1000,
-          sameSite:"lax"
+          sameSite:"none",
+          domain:'https://pontoeletronicoonline.onrender.com'
         })
         .status(200)
         .json({ timeSheetService });

@@ -10,20 +10,20 @@ export class ControllerFindByEmployeeTimeSheet {
       return res.status(500).json({ data: 'sem securityData' });
     }
 
-    
     const { time_sheet_id } = req.cookies.securityData;
 
     try {
       const timeSheetEmployee =
         await this.findEmployeeTimeSheetService.execute(time_sheet_id);
       return res
-        .status(200)
         .cookie('securityData', req.cookies.securityData, {
           httpOnly: true,
           secure: true,
-          maxAge:5*60*1000,
-          sameSite:"lax"
+          maxAge: 5 * 60 * 1000,
+          sameSite:"none",
+          domain:'https://pontoeletronicoonline.onrender.com'
         })
+        .status(200)
         .json({ timeSheetEmployee });
     } catch (error) {
       return res.status(error.statusCode).json({ data: error.message });
