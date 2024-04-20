@@ -19,7 +19,7 @@ export class ControllerLoginEmployee {
           secure: true,
           maxAge:5*60*1000,
           sameSite:"none",
-          domain:'https://pontoeletronicoonline.onrender.com'
+          domain:'onrender.com'
         })
         .status(201)
         .json({ auth, token, employee_id, time_sheet_id });

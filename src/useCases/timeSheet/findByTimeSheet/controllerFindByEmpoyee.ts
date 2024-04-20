@@ -21,7 +21,7 @@ export class ControllerFindByEmployeeTimeSheet {
           secure: true,
           maxAge: 5 * 60 * 1000,
           sameSite:"none",
-          domain:'https://pontoeletronicoonline.onrender.com'
+          domain:'onrender.com'
         })
         .status(200)
         .json({ timeSheetEmployee });
