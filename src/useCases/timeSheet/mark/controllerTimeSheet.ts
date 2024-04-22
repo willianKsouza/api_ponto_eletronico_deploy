@@ -36,9 +36,7 @@ export class ControllerTimeSheet {
         .cookie("securityData", cookies, {
           httpOnly: true,
           secure: true,
-          maxAge:5*60*1000,
-          sameSite:"none",
-          domain:'onrender.com'
+          sameSite:"strict",
         })
         .status(200)
         .json({ timeSheetService });

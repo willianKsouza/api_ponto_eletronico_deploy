@@ -11,17 +11,15 @@ export class ControllerFindByEmployeeTimeSheet {
     }
 
     const { time_sheet_id } = req.cookies.securityData;
-
+    let cookies = req.cookies.securityData
     try {
       const timeSheetEmployee =
         await this.findEmployeeTimeSheetService.execute(time_sheet_id);
       return res
-        .cookie('securityData', req.cookies.securityData, {
+        .cookie('securityData', cookies, {
           httpOnly: true,
           secure: true,
-          maxAge: 5 * 60 * 1000,
-          sameSite:"none",
-          domain:'onrender.com'
+          sameSite:"strict",
         })
         .status(200)
         .json({ timeSheetEmployee });
