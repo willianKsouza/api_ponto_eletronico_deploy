@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 })
 app.use(cookieParser());
 app.use(cors({
-  origin:process.env.CORS_ORIGIN,
+  origin:'*',
   credentials:true,
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }));
