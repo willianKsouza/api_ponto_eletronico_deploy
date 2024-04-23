@@ -13,7 +13,7 @@ config();
 
 
 const app = express();
-app.use(cookieParser());
+
 //Nota: esse midleware evite requisiçoes TRACE para esse servidor(trace method consegue ter acesso aos coockies httpOnly)
 // app.use((req, res, next) => {
 //   const allowedMethods = [
@@ -33,6 +33,7 @@ app.use(cookieParser());
 // })
 
 app.use(cors({credentials: true, origin: process.env.CORS_ORIGIN}));
+app.use(cookieParser());
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN);
 //   res.header("Access-Control-Allow-Credentials", "true");
