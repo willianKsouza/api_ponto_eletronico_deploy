@@ -16,8 +16,6 @@ export class ControllerLoginEmployee {
       return res
         .cookie("securityData", {auth, token, employee_id, time_sheet_id, function_employee}, {
           httpOnly: true,
-          secure: true,
-          sameSite:"strict",
           path:process.env.CORS_ORIGIN
         })
         .status(201)
