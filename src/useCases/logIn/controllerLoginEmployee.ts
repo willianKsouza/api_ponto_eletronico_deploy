@@ -18,6 +18,7 @@ export class ControllerLoginEmployee {
           httpOnly: true,
           secure: true,
           sameSite:"strict",
+          path:process.env.CORS_ORIGIN
         })
         .status(201)
         .json({ auth, token, employee_id, time_sheet_id });

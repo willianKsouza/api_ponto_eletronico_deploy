@@ -33,11 +33,12 @@ export class ControllerTimeSheet {
         cookies.time_sheet_id = ''
       }
       return res
-        .cookie("securityData", cookies, {
-          httpOnly: true,
-          secure: true,
-          sameSite:"strict",
-        })
+        // .cookie("securityData", cookies, {
+        //   httpOnly: true,
+        //   secure: true,
+        //   sameSite:"strict",
+        //   path:process.env.CORS_ORIGIN
+        // })
         .status(200)
         .json({ timeSheetService });
     } catch (error) {
