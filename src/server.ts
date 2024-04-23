@@ -32,11 +32,13 @@ app.use((req, res, next) => {
   next();
 })
 app.use(cookieParser());
-app.use(cors({
-  origin:'*',
-  credentials:true,
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
-}));
+// app.use(cors({
+//   origin:'*',
+//   credentials:true,
+//   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+//   methods:['GET', 'PUT', 'POST', 'PUT', 'DELETE'],
+// }));
+app.use(cors());
 app.engine("handlebars", engine({
         extname: '.handlebars',
         defaultLayout:false
