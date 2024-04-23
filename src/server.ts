@@ -15,31 +15,31 @@ config();
 const app = express();
 app.use(cookieParser());
 //Nota: esse midleware evite requisiçoes TRACE para esse servidor(trace method consegue ter acesso aos coockies httpOnly)
-app.use((req, res, next) => {
-  const allowedMethods = [
-    "OPTIONS",
-    "HEAD",
-    "CONNECT",
-    "GET",
-    "POST",
-    "PUT",
-    "DELETE",
-    "PATCH",
-  ];
-  if (!allowedMethods.includes(req.method)) {
-    res.status(405).send(`${req.method} not allowed.`);
-  }
-  next();
-})
+// app.use((req, res, next) => {
+//   const allowedMethods = [
+//     "OPTIONS",
+//     "HEAD",
+//     "CONNECT",
+//     "GET",
+//     "POST",
+//     "PUT",
+//     "DELETE",
+//     "PATCH",
+//   ];
+//   if (!allowedMethods.includes(req.method)) {
+//     res.status(405).send(`${req.method} not allowed.`);
+//   }
+//   next();
+// })
 
-app.use(cors({credentials: true, origin: process.env.CORS_ORIGIN}));
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN);
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-  next();
-});
+app.use(cors({credentials: true}));
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN);
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+//   res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+//   next();
+// });
 
 // app.use(cors({
 //   origin: process.env.CORS_ORIGIN,
