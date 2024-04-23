@@ -13,7 +13,7 @@ config();
 
 
 const app = express();
-
+app.use(cookieParser());
 //Nota: esse midleware evite requisiçoes TRACE para esse servidor(trace method consegue ter acesso aos coockies httpOnly)
 app.use((req, res, next) => {
   const allowedMethods = [
@@ -31,13 +31,26 @@ app.use((req, res, next) => {
   }
   next();
 })
-app.use(cookieParser());
-app.use(cors({
-  origin: process.env.CORS_ORIGIN,
-  credentials:true,
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-  methods:['GET', 'PUT', 'POST', 'PUT', 'DELETE'],
-}));
+
+app.use(cors({credentials: true, origin: process.env.CORS_ORIGIN}));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN);
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  next();
+});
+
+// app.use(cors({
+//   origin: process.env.CORS_ORIGIN,
+//   credentials:true,
+//   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+//   methods:['GET', 'PUT', 'POST', 'PUT', 'DELETE'],
+// }));
+
+
+
+
 
 app.engine("handlebars", engine({
         extname: '.handlebars',
@@ -50,6 +63,7 @@ app.set("views", path.resolve(__dirname, "./views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(errorMiddleware);
+
 app.use(routes);
 
 app.listen(process.env.PORT, () => {
