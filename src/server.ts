@@ -32,7 +32,7 @@ app.use(cookieParser());
 //   next();
 // })
 
-app.use(cors({credentials: true}));
+app.use(cors({credentials: true, origin: process.env.CORS_ORIGIN}));
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN);
 //   res.header("Access-Control-Allow-Credentials", "true");
