@@ -1,23 +1,17 @@
-import { Request, Response } from "express";
-import { TimeSheetService } from "./timeSheetService";
+import { Request, Response } from 'express';
+import { TimeSheetService } from './timeSheetService';
 
 export class ControllerTimeSheet {
-  constructor(private sheetService: TimeSheetService) { }
+  constructor(private sheetService: TimeSheetService) {}
   async mark(req: Request, res: Response) {
+    const { current_time_stamp, type_marking, work_load } = req.body;
 
-    
-    let cookies = req.cookies.securityData
-    
-    
-    const {
-      current_time_stamp,
-      type_marking,
-      work_load,
-    } = req.body;
-    
+    const time_sheet_id = req.headers['time_sheet_id'] as string;
+    const employee_id = req.headers['employee_id'] as string;
 
-    const { time_sheet_id, employee_id } = req.cookies.securityData
-    
+    console.log(time_sheet_id);
+    console.log(employee_id);
+
     try {
       const timeSheetService = await this.sheetService.execute({
         current_time_stamp,
@@ -27,20 +21,12 @@ export class ControllerTimeSheet {
         work_load,
       });
       if (typeof timeSheetService == 'string') {
-          cookies.time_sheet_id = timeSheetService 
+        return res
+          .header('time_sheet_id', `${timeSheetService}`)
+          .status(200)
+          .json({ timeSheetService });
       }
-      if (type_marking == 'out_time') {
-        cookies.time_sheet_id = ''
-      }
-      return res
-        // .cookie("securityData", cookies, {
-        //   httpOnly: true,
-        //   secure: true,
-        //   sameSite:"strict",
-        //   path:process.env.CORS_ORIGIN
-        // })
-        .status(200)
-        .json({ timeSheetService });
+      return res.status(200).json('sucesso');
     } catch (error) {
       return res.status(error.statusCode).json({ data: error.message });
     }

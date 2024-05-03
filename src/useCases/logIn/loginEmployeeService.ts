@@ -31,7 +31,8 @@ export class LoginEmployeeService {
         token,
         employee_id:employeeCredentials.employee_id,
         time_sheet_id:employeeCredentials.last_register_time_sheet,
-        function_employee:employeeCredentials.function_employee
+        function_employee:employeeCredentials.function_employee,
+        name_employee:employeeCredentials.name_employee
       };
     } else {
       throw new apiError("senha incorreta", 404);

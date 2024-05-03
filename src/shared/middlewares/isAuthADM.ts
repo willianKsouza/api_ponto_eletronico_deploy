@@ -8,7 +8,7 @@ export async function isAuthADM(
   next: NextFunction
 ) {
   try {
-    const idAdm = req.cookies.securityData.employee_id;
+    const idAdm = req.headers['employee_id'] as string;
     const isAdm = await new FindByIdRepository().findById(idAdm);
     if (isAdm?.function_employee == "admin") {
       next();

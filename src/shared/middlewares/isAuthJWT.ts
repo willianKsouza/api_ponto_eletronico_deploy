@@ -3,7 +3,7 @@ import { verify } from "jsonwebtoken";
 
 
 export function isAuthJWT(req: Request, res: Response, next: NextFunction) {
-  const token = req.cookies.securityData.token
+  const token = req.headers['token'] as string
 
   if (!token) {
     return res.status(401).json({ auth: false, message: "No token provided." });

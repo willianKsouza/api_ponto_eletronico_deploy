@@ -5,10 +5,11 @@ export class ControllerFindByIdEmployee {
   constructor(private findByIdEmpoyee: FindByIdEmpoyeeService) {}
   async findById(req: Request, res: Response) {
     try {
-      if (!req.cookies?.securityData) {
-        return res.status(401).json({ data: 'sem securityData' });
+      if (!req.headers['employee_id']) {
+        return res.status(401).json({ data: 'sem employee_id' });
       }
-      const { employee_id } = req.cookies.securityData;
+      const employee_id = req.headers['employee_id'] as string
+
       const employee = await this.findByIdEmpoyee.execute(employee_id);
       return res.status(200).json({ employee });
     } catch (error) {

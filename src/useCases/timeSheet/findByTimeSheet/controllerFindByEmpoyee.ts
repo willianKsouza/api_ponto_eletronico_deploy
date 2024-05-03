@@ -6,22 +6,15 @@ export class ControllerFindByEmployeeTimeSheet {
     private findEmployeeTimeSheetService: FindEmployeeTimeSheetService,
   ) {}
   async findTimeSheet(req: Request, res: Response) {
-    if (!req.cookies.securityData) {
-      return res.status(500).json({ data: 'sem securityData' });
+    if (!req.headers['time_sheet_id']) {
+      return res.status(401).json({ data: 'sem time_sheet_id' });
     }
-
-    const { time_sheet_id } = req.cookies.securityData;
-    let cookies = req.cookies.securityData
+ 
     try {
+      const time_sheet_id = req.headers['time_sheet_id'] as string
       const timeSheetEmployee =
         await this.findEmployeeTimeSheetService.execute(time_sheet_id);
       return res
-        // .cookie('securityData', cookies, {
-        //   httpOnly: true,
-        //   secure: true,
-        //   sameSite:"strict",
-        //   path:process.env.CORS_ORIGIN
-        // })
         .status(200)
         .json({ timeSheetEmployee });
     } catch (error) {
