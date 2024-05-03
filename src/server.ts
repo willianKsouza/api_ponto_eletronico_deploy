@@ -15,12 +15,7 @@ const app = express();
 app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN, exposedHeaders:['Auth', 'Token', 'Employee_id', 'Time_sheet_id', 'Function_employee', 'Name_employee','Email'] }));
 app.use(cookieParser());
 
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
-  }),
-);
+
 
 app.engine(
   'handlebars',
