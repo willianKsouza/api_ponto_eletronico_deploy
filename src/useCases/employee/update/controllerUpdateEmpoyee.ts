@@ -12,7 +12,7 @@ export class ControllerUpdateEmployee {
     } = req.body;
 
     try {
-      const { employee_id } = req.cookies.securityData;
+      const employee_id = req.headers['employee_id'] as string
       
       
       const employee = await this.updateEmployee.execute({

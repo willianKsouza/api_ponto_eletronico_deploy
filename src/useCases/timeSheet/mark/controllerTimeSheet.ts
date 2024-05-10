@@ -9,9 +9,6 @@ export class ControllerTimeSheet {
     const time_sheet_id = req.headers['time_sheet_id'] as string;
     const employee_id = req.headers['employee_id'] as string;
 
-    console.log(time_sheet_id);
-    console.log(employee_id);
-
     try {
       const timeSheetService = await this.sheetService.execute({
         current_time_stamp,

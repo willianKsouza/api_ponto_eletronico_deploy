@@ -11,7 +11,7 @@ export class ControllerForgotPassword {
     try {
       const sendEmailForgotPassword =
           await this.sendEmailForgotPassword.execute(email);
-        return res.status(204).json()
+        return res.status(200).json('ok')
     } catch (error) {
         return res.status(error.statusCode).json({ data: error.message });
     }

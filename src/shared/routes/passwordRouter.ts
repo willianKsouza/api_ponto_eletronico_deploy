@@ -7,7 +7,7 @@ import { isValidUUID } from "../utils/isValidUUID";
 
 const passwordRouter = Router();
 
-passwordRouter.get("/forgot", (req, res) =>
+passwordRouter.post("/forgot", (req, res) =>
   controllerForgotPassword.create(req, res)
 );
 

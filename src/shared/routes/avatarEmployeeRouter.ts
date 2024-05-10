@@ -4,7 +4,7 @@ import { upload } from "../middlewares/uploads";
 
 const avatarRouter = Router();
 
-avatarRouter.post("/:id", upload.single("avatar"), (req, res) =>
+avatarRouter.post("/", upload.single("avatar"), (req, res) =>
   controllerAvatarEmployee.uploadFile(req, res)
 );
 

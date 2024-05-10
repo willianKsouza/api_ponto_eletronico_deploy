@@ -1,7 +1,5 @@
-import {
-  createTransport,
-  createTestAccount,
-} from "nodemailer";
+
+const nodemailer = require('nodemailer')
 import { ISendEmail } from "../../shared/interfaces/ISendEmail";
 
 import hbs from "nodemailer-express-handlebars";
@@ -13,16 +11,17 @@ export class Email implements ISendEmail {
     name: string,
     token: string
   ): Promise<void> {
-    const account = await createTestAccount();
-    const transport = createTransport({
-      host: account.smtp.host,
-      port: account.smtp.port,
-      secure: account.smtp.secure,
+
+    const transport = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: process.env.MAIL_PORT,
+      secure: false,
       auth: {
-        user: account.user,
-        pass: account.pass,
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASSWORD
       },
     });
+    
     transport.use(
       "compile",
       hbs({
@@ -45,6 +44,7 @@ export class Email implements ISendEmail {
       },
     };
 
-     await transport.sendMail(mail);
+
+    return await transport.sendMail(mail);
   }
 }

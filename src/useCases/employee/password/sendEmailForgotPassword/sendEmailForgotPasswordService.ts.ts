@@ -21,7 +21,8 @@ export class SendForgotEmailPasswordService {
 
       const token = await this.userToken.createUserToken(employee.employee_id);
       if (token) {
-        await this.email.sendEmail(
+        
+      return await this.email.sendEmail(
           "equipetimesheet@api.com.br",
           email,
           "[API TIME SHEET]redefiniçao de senha",
